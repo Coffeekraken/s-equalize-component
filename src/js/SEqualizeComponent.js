@@ -36,7 +36,7 @@ import __offset from 'coffeekraken-sugar/js/dom/offset'
 /**
  * @name 			Equalize
  * Simply made some equal height columns.
- * @styleguide  	Layout / Equalize
+ * @styleguide  	Webcomponents / Equalize
  * @example 		html
  * <div class="my-cool-column tf" style="width:400px; float:left;">
  * 	<s-equalize group="cols">

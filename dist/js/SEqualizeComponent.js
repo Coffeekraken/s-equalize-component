@@ -61,7 +61,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 /**
  * @name 			Equalize
  * Simply made some equal height columns.
- * @styleguide  	Layout / Equalize
+ * @styleguide  	Webcomponents / Equalize
  * @example 		html
  * <div class="my-cool-column tf" style="width:400px; float:left;">
  * 	<s-equalize group="cols">
