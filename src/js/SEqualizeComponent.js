@@ -9,7 +9,8 @@ import __offset from 'coffeekraken-sugar/js/dom/offset'
  * Simply made some equal height columns.
  *
  * @example 	html
- * <div class="my-cool-column tf" style="width:400px; float:left;">
+ * <div style="overflow:hidden">
+ * 	<div class="my-cool-column tf vr" style="width:400px; float:left;">
  * 	<s-equalize group="cols">
  *  	<h4>Column 1</h4>
  *  	<p>Integer congue a nibh sed elementum. Mauris ligula sem, scelerisque.</p>
@@ -19,7 +20,7 @@ import __offset from 'coffeekraken-sugar/js/dom/offset'
  * 		</a>
  *  </s-equalize>
  * </div>
- * <div class="my-cool-column tf" style="width:400px; float:left;">
+ * <div class="my-cool-column tf vr" style="width:400px; float:left;">
  * 	<s-equalize group="cols">
  *  	<h4>Column 1</h4>
  *  	<p>Donec scelerisque eu felis sit amet sodales. Nam sit amet lacus purus. Aliquam rutrum facilisis velit non egestas. Maecenas condimentum condimentum eleifend. Ut sed massa tempus, pellentesque orci id, facilisis dolor. Integer ac ligula convallis, egestas sem ut, luctus purus.</p>
@@ -28,6 +29,7 @@ import __offset from 'coffeekraken-sugar/js/dom/offset'
  *   		More infos...
  * 		</a>
  *  </s-equalize>
+ * </div>
  * </div>
  *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
@@ -38,7 +40,8 @@ import __offset from 'coffeekraken-sugar/js/dom/offset'
  * Simply made some equal height columns.
  * @styleguide  	Layout / Equalize
  * @example 		html
- * <div class="my-cool-column tf" style="width:400px; float:left;">
+ * <div style="overflow:hidden">
+ * <div class="my-cool-column tf vr" style="width:400px; float:left;">
  * 	<s-equalize group="cols">
  *  	<h4>Column 1</h4>
  *  	<p>Integer congue a nibh sed elementum. Mauris ligula sem, scelerisque.</p>
@@ -48,7 +51,7 @@ import __offset from 'coffeekraken-sugar/js/dom/offset'
  * 		</a>
  *  </s-equalize>
  * </div>
- * <div class="my-cool-column tf" style="width:400px; float:left;">
+ * <div class="my-cool-column tf vr" style="width:400px; float:left;">
  * 	<s-equalize group="cols">
  *  	<h4>Column 1</h4>
  *  	<p>Donec scelerisque eu felis sit amet sodales. Nam sit amet lacus purus. Aliquam rutrum facilisis velit non egestas. Maecenas condimentum condimentum eleifend. Ut sed massa tempus, pellentesque orci id, facilisis dolor. Integer ac ligula convallis, egestas sem ut, luctus purus.</p>
@@ -57,7 +60,9 @@ import __offset from 'coffeekraken-sugar/js/dom/offset'
  *   		More infos...
  * 		</a>
  *  </s-equalize>
- * </div> * @see 			https://github.com/Coffeekraken/s-google-map-component/tree/release/{version}
+ * </div>
+ * </div>
+ * @see 			https://github.com/Coffeekraken/s-google-map-component/tree/release/{version}
  * @author 			Olivier Bossel <olivier.bossel@gmail.com>
  */
 
