@@ -22,7 +22,7 @@ import __offset from 'coffeekraken-sugar/js/dom/offset'
  * </div>
  * <div class="my-cool-column tf vr" style="width:400px; float:left;">
  * 	<s-equalize group="cols">
- *  	<h4>Column 1</h4>
+ *  	<h4>Column 2</h4>
  *  	<p>Donec scelerisque eu felis sit amet sodales. Nam sit amet lacus purus. Aliquam rutrum facilisis velit non egestas. Maecenas condimentum condimentum eleifend. Ut sed massa tempus, pellentesque orci id, facilisis dolor. Integer ac ligula convallis, egestas sem ut, luctus purus.</p>
  *  	<s-equalize-equalizer></s-equalize-equalizer>
  *  	<a href="javascript:void(0);" class="btn btn--primary">
@@ -53,7 +53,7 @@ import __offset from 'coffeekraken-sugar/js/dom/offset'
  * </div>
  * <div class="my-cool-column tf vr" style="width:400px; float:left;">
  * 	<s-equalize group="cols">
- *  	<h4>Column 1</h4>
+ *  	<h4>Column 2</h4>
  *  	<p>Donec scelerisque eu felis sit amet sodales. Nam sit amet lacus purus. Aliquam rutrum facilisis velit non egestas. Maecenas condimentum condimentum eleifend. Ut sed massa tempus, pellentesque orci id, facilisis dolor. Integer ac ligula convallis, egestas sem ut, luctus purus.</p>
  *  	<s-equalize-equalizer></s-equalize-equalizer>
  *  	<a href="javascript:void(0);" class="btn btn--primary">
