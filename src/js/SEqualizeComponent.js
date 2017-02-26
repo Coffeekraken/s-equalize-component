@@ -110,7 +110,7 @@ export default class SEqualizeComponent extends SWebComponent {
 	 * Css
 	 * @protected
 	 */
-	static css(componentName, componentNameDash) {
+	static defaultCss(componentName, componentNameDash) {
 		return `
 			${componentNameDash} {
 				display : block;

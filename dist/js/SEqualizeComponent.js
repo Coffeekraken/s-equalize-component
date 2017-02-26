@@ -369,14 +369,14 @@ var SEqualizeComponent = function (_SWebComponent) {
 			return this._equalizerElmCache;
 		}
 	}], [{
-		key: 'css',
+		key: 'defaultCss',
 
 
 		/**
    * Css
    * @protected
    */
-		value: function css(componentName, componentNameDash) {
+		value: function defaultCss(componentName, componentNameDash) {
 			return '\n\t\t\t' + componentNameDash + ' {\n\t\t\t\tdisplay : block;\n\t\t\t}\n\t\t';
 		}
 	}, {
