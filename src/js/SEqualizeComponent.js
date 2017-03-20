@@ -1,5 +1,4 @@
 import SWebComponent from 'coffeekraken-sugar/js/core/SWebComponent'
-// import sTemplateIntegrator from 'coffeekraken-sugar/js/core/sTemplateIntegrator'
 import __dispatchEvent from 'coffeekraken-sugar/js/dom/dispatchEvent'
 import __offset from 'coffeekraken-sugar/js/dom/offset'
 
@@ -349,15 +348,3 @@ export default class SEqualizeComponent extends SWebComponent {
 		});
 	}
 }
-
-// STemplate integration
-// sTemplateIntegrator.registerComponentIntegration(SEqualizeComponent, (component) => {
-// 	sTemplateIntegrator.ignore(component, {
-// 		style : true,
-// 	});
-// 	if (component.equalizerElm) {
-// 		sTemplateIntegrator.ignore(component.equalizerElm, {
-// 			style : true
-// 		});
-// 	}
-// });
