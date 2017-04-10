@@ -7,6 +7,7 @@ import __offset from 'coffeekraken-sugar/js/dom/offset'
  * @extends 	SWebComponent
  * Simply made some equal height columns.
  *
+ * @styleguide  	Layout / Equalize
  * @example 	html
  * <div style="overflow:hidden">
  * 	<div class="my-cool-column tf vr" style="width:400px; float:left;">
@@ -32,37 +33,6 @@ import __offset from 'coffeekraken-sugar/js/dom/offset'
  * </div>
  *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
- */
-
-/**
- * @name 			Equalize
- * Simply made some equal height columns.
- * @styleguide  	Layout / Equalize
- * @example 		html
- * <div style="overflow:hidden">
- * <div class="my-cool-column tf vr" style="width:400px; float:left;">
- * 	<s-equalize group="cols">
- *  	<h4>Column 1</h4>
- *  	<p>Integer congue a nibh sed elementum. Mauris ligula sem, scelerisque.</p>
- *  	<s-equalize-equalizer></s-equalize-equalizer>
- *  	<a href="javascript:void(0);" class="btn btn--primary">
- *   		More infos...
- * 		</a>
- *  </s-equalize>
- * </div>
- * <div class="my-cool-column tf vr" style="width:400px; float:left;">
- * 	<s-equalize group="cols">
- *  	<h4>Column 2</h4>
- *  	<p>Donec scelerisque eu felis sit amet sodales. Nam sit amet lacus purus. Aliquam rutrum facilisis velit non egestas. Maecenas condimentum condimentum eleifend. Ut sed massa tempus, pellentesque orci id, facilisis dolor. Integer ac ligula convallis, egestas sem ut, luctus purus.</p>
- *  	<s-equalize-equalizer></s-equalize-equalizer>
- *  	<a href="javascript:void(0);" class="btn btn--primary">
- *   		More infos...
- * 		</a>
- *  </s-equalize>
- * </div>
- * </div>
- * @see 			https://github.com/Coffeekraken/s-google-map-component/tree/release/{version}
- * @author 			Olivier Bossel <olivier.bossel@gmail.com>
  */
 
 export default class SEqualizeComponent extends SWebComponent {

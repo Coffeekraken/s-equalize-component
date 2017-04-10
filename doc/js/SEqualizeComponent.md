@@ -7,7 +7,8 @@ Simply made some equal height columns.
 
 ### Example
 ```html
-	<div class="my-cool-column tf" style="width:400px; float:left;">
+	<div style="overflow:hidden">
+	<div class="my-cool-column tf vr" style="width:400px; float:left;">
 	<s-equalize group="cols">
  	<h4>Column 1</h4>
  	<p>Integer congue a nibh sed elementum. Mauris ligula sem, scelerisque.</p>
@@ -17,9 +18,9 @@ Simply made some equal height columns.
 		</a>
  </s-equalize>
 </div>
-<div class="my-cool-column tf" style="width:400px; float:left;">
+<div class="my-cool-column tf vr" style="width:400px; float:left;">
 	<s-equalize group="cols">
- 	<h4>Column 1</h4>
+ 	<h4>Column 2</h4>
  	<p>Donec scelerisque eu felis sit amet sodales. Nam sit amet lacus purus. Aliquam rutrum facilisis velit non egestas. Maecenas condimentum condimentum eleifend. Ut sed massa tempus, pellentesque orci id, facilisis dolor. Integer ac ligula convallis, egestas sem ut, luctus purus.</p>
  	<s-equalize-equalizer></s-equalize-equalizer>
  	<a href="javascript:void(0);" class="btn btn--primary">
@@ -27,43 +28,11 @@ Simply made some equal height columns.
 		</a>
  </s-equalize>
 </div>
-```
-Author : Olivier Bossel <olivier.bossel@gmail.com>
-
-
-
-## Examples
-
-Here's some usage examples.
-
-### Equalize
-
-Simply made some equal height columns.
-
-#### Example
-```html
-	<div class="my-cool-column tf" style="width:400px; float:left;">
-	<s-equalize group="cols">
- 	<h4>Column 1</h4>
- 	<p>Integer congue a nibh sed elementum. Mauris ligula sem, scelerisque.</p>
- 	<s-equalize-equalizer></s-equalize-equalizer>
- 	<a href="javascript:void(0);" class="btn btn--primary">
-  		More infos...
-		</a>
- </s-equalize>
 </div>
-<div class="my-cool-column tf" style="width:400px; float:left;">
-	<s-equalize group="cols">
- 	<h4>Column 1</h4>
- 	<p>Donec scelerisque eu felis sit amet sodales. Nam sit amet lacus purus. Aliquam rutrum facilisis velit non egestas. Maecenas condimentum condimentum eleifend. Ut sed massa tempus, pellentesque orci id, facilisis dolor. Integer ac ligula convallis, egestas sem ut, luctus purus.</p>
- 	<s-equalize-equalizer></s-equalize-equalizer>
- 	<a href="javascript:void(0);" class="btn btn--primary">
-  		More infos...
-		</a>
- </s-equalize>
-</div> * @see 			https://github.com/Coffeekraken/s-google-map-component/tree/release/0.0.1
 ```
 Author : Olivier Bossel <olivier.bossel@gmail.com>
+
+
 
 
 ## Attributes
@@ -84,8 +53,6 @@ Default : **null**
 Specify the timeout to wait before resize again after a window resizeTimeout
 
 Type : **{ [Number](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Number) }**
-
-Default : **200**
 
 
 
@@ -135,5 +102,3 @@ Equalize from an element or a line object
 Name  |  Type  |  Description  |  Status  |  Default
 ------------  |  ------------  |  ------------  |  ------------  |  ------------
 elmOrLine  |  **{ [HTMLElement](https://developer.mozilla.org/fr/docs/Web/API/HTMLElement) , [Object](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Object) }**  |  An HTMLElement that belong to a line or directly a line object  |  optional  |  null
-
-Default : **null) {**
