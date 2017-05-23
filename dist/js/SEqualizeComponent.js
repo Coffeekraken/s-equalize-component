@@ -31,7 +31,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * @extends 	SWebComponent
  * Simply made some equal height columns.
  *
- * @styleguide  	Layout / Equalize
  * @example 	html
  * <div style="overflow:hidden">
  * 	<div class="my-cool-column tf vr" style="width:400px; float:left;">

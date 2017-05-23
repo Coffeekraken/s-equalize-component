@@ -7,7 +7,6 @@ import __offset from 'coffeekraken-sugar/js/dom/offset'
  * @extends 	SWebComponent
  * Simply made some equal height columns.
  *
- * @styleguide  	Layout / Equalize
  * @example 	html
  * <div style="overflow:hidden">
  * 	<div class="my-cool-column tf vr" style="width:400px; float:left;">
