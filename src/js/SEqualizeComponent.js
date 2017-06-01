@@ -1,5 +1,4 @@
 import SWebComponent from 'coffeekraken-sugar/js/core/SWebComponent'
-// import sTemplateIntegrator from 'coffeekraken-sugar/js/core/sTemplateIntegrator'
 import __dispatchEvent from 'coffeekraken-sugar/js/dom/dispatchEvent'
 import __offset from 'coffeekraken-sugar/js/dom/offset'
 
@@ -9,7 +8,8 @@ import __offset from 'coffeekraken-sugar/js/dom/offset'
  * Simply made some equal height columns.
  *
  * @example 	html
- * <div class="my-cool-column tf" style="width:400px; float:left;">
+ * <div style="overflow:hidden">
+ * 	<div class="my-cool-column tf vr" style="width:400px; float:left;">
  * 	<s-equalize group="cols">
  *  	<h4>Column 1</h4>
  *  	<p>Integer congue a nibh sed elementum. Mauris ligula sem, scelerisque.</p>
@@ -19,46 +19,19 @@ import __offset from 'coffeekraken-sugar/js/dom/offset'
  * 		</a>
  *  </s-equalize>
  * </div>
- * <div class="my-cool-column tf" style="width:400px; float:left;">
+ * <div class="my-cool-column tf vr" style="width:400px; float:left;">
  * 	<s-equalize group="cols">
- *  	<h4>Column 1</h4>
+ *  	<h4>Column 2</h4>
  *  	<p>Donec scelerisque eu felis sit amet sodales. Nam sit amet lacus purus. Aliquam rutrum facilisis velit non egestas. Maecenas condimentum condimentum eleifend. Ut sed massa tempus, pellentesque orci id, facilisis dolor. Integer ac ligula convallis, egestas sem ut, luctus purus.</p>
  *  	<s-equalize-equalizer></s-equalize-equalizer>
  *  	<a href="javascript:void(0);" class="btn btn--primary">
  *   		More infos...
  * 		</a>
  *  </s-equalize>
+ * </div>
  * </div>
  *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
- */
-
-/**
- * @name 			Equalize
- * Simply made some equal height columns.
- * @styleguide  	Layout / Equalize
- * @example 		html
- * <div class="my-cool-column tf" style="width:400px; float:left;">
- * 	<s-equalize group="cols">
- *  	<h4>Column 1</h4>
- *  	<p>Integer congue a nibh sed elementum. Mauris ligula sem, scelerisque.</p>
- *  	<s-equalize-equalizer></s-equalize-equalizer>
- *  	<a href="javascript:void(0);" class="btn btn--primary">
- *   		More infos...
- * 		</a>
- *  </s-equalize>
- * </div>
- * <div class="my-cool-column tf" style="width:400px; float:left;">
- * 	<s-equalize group="cols">
- *  	<h4>Column 1</h4>
- *  	<p>Donec scelerisque eu felis sit amet sodales. Nam sit amet lacus purus. Aliquam rutrum facilisis velit non egestas. Maecenas condimentum condimentum eleifend. Ut sed massa tempus, pellentesque orci id, facilisis dolor. Integer ac ligula convallis, egestas sem ut, luctus purus.</p>
- *  	<s-equalize-equalizer></s-equalize-equalizer>
- *  	<a href="javascript:void(0);" class="btn btn--primary">
- *   		More infos...
- * 		</a>
- *  </s-equalize>
- * </div> * @see 			https://github.com/Coffeekraken/s-google-map-component/tree/release/{version}
- * @author 			Olivier Bossel <olivier.bossel@gmail.com>
  */
 
 export default class SEqualizeComponent extends SWebComponent {
@@ -105,7 +78,7 @@ export default class SEqualizeComponent extends SWebComponent {
 	 * Css
 	 * @protected
 	 */
-	static css(componentName, componentNameDash) {
+	static defaultCss(componentName, componentNameDash) {
 		return `
 			${componentNameDash} {
 				display : block;
@@ -344,15 +317,3 @@ export default class SEqualizeComponent extends SWebComponent {
 		});
 	}
 }
-
-// STemplate integration
-// sTemplateIntegrator.registerComponentIntegration(SEqualizeComponent, (component) => {
-// 	sTemplateIntegrator.ignore(component, {
-// 		style : true,
-// 	});
-// 	if (component.equalizerElm) {
-// 		sTemplateIntegrator.ignore(component.equalizerElm, {
-// 			style : true
-// 		});
-// 	}
-// });

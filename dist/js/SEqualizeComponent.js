@@ -25,8 +25,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import sTemplateIntegrator from 'coffeekraken-sugar/js/core/sTemplateIntegrator'
-
 
 /**
  * @name 	SEqualizeComponent
@@ -34,7 +32,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * Simply made some equal height columns.
  *
  * @example 	html
- * <div class="my-cool-column tf" style="width:400px; float:left;">
+ * <div style="overflow:hidden">
+ * 	<div class="my-cool-column tf vr" style="width:400px; float:left;">
  * 	<s-equalize group="cols">
  *  	<h4>Column 1</h4>
  *  	<p>Integer congue a nibh sed elementum. Mauris ligula sem, scelerisque.</p>
@@ -44,46 +43,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * 		</a>
  *  </s-equalize>
  * </div>
- * <div class="my-cool-column tf" style="width:400px; float:left;">
+ * <div class="my-cool-column tf vr" style="width:400px; float:left;">
  * 	<s-equalize group="cols">
- *  	<h4>Column 1</h4>
+ *  	<h4>Column 2</h4>
  *  	<p>Donec scelerisque eu felis sit amet sodales. Nam sit amet lacus purus. Aliquam rutrum facilisis velit non egestas. Maecenas condimentum condimentum eleifend. Ut sed massa tempus, pellentesque orci id, facilisis dolor. Integer ac ligula convallis, egestas sem ut, luctus purus.</p>
  *  	<s-equalize-equalizer></s-equalize-equalizer>
  *  	<a href="javascript:void(0);" class="btn btn--primary">
  *   		More infos...
  * 		</a>
  *  </s-equalize>
+ * </div>
  * </div>
  *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
- */
-
-/**
- * @name 			Equalize
- * Simply made some equal height columns.
- * @styleguide  	Layout / Equalize
- * @example 		html
- * <div class="my-cool-column tf" style="width:400px; float:left;">
- * 	<s-equalize group="cols">
- *  	<h4>Column 1</h4>
- *  	<p>Integer congue a nibh sed elementum. Mauris ligula sem, scelerisque.</p>
- *  	<s-equalize-equalizer></s-equalize-equalizer>
- *  	<a href="javascript:void(0);" class="btn btn--primary">
- *   		More infos...
- * 		</a>
- *  </s-equalize>
- * </div>
- * <div class="my-cool-column tf" style="width:400px; float:left;">
- * 	<s-equalize group="cols">
- *  	<h4>Column 1</h4>
- *  	<p>Donec scelerisque eu felis sit amet sodales. Nam sit amet lacus purus. Aliquam rutrum facilisis velit non egestas. Maecenas condimentum condimentum eleifend. Ut sed massa tempus, pellentesque orci id, facilisis dolor. Integer ac ligula convallis, egestas sem ut, luctus purus.</p>
- *  	<s-equalize-equalizer></s-equalize-equalizer>
- *  	<a href="javascript:void(0);" class="btn btn--primary">
- *   		More infos...
- * 		</a>
- *  </s-equalize>
- * </div> * @see 			https://github.com/Coffeekraken/s-google-map-component/tree/release/{version}
- * @author 			Olivier Bossel <olivier.bossel@gmail.com>
  */
 
 var SEqualizeComponent = function (_SWebComponent) {
@@ -364,14 +336,14 @@ var SEqualizeComponent = function (_SWebComponent) {
 			return this._equalizerElmCache;
 		}
 	}], [{
-		key: 'css',
+		key: 'defaultCss',
 
 
 		/**
    * Css
    * @protected
    */
-		value: function css(componentName, componentNameDash) {
+		value: function defaultCss(componentName, componentNameDash) {
 			return '\n\t\t\t' + componentNameDash + ' {\n\t\t\t\tdisplay : block;\n\t\t\t}\n\t\t';
 		}
 	}, {
@@ -422,19 +394,6 @@ var SEqualizeComponent = function (_SWebComponent) {
 
 	return SEqualizeComponent;
 }(_SWebComponent3.default);
-
-// STemplate integration
-// sTemplateIntegrator.registerComponentIntegration(SEqualizeComponent, (component) => {
-// 	sTemplateIntegrator.ignore(component, {
-// 		style : true,
-// 	});
-// 	if (component.equalizerElm) {
-// 		sTemplateIntegrator.ignore(component.equalizerElm, {
-// 			style : true
-// 		});
-// 	}
-// });
-
 
 SEqualizeComponent._groups = {};
 exports.default = SEqualizeComponent;
