@@ -63,14 +63,15 @@ export default class SEqualizeComponent extends SWebComponent {
 			 * @prop
 			 * @type 	{Number}
 			 */
-			resizeTimeout : 200
-		};
-	}
+			resizeTimeout : 200,
 
-	static get mountDependencies() {
-		return [function() {
-			return __whenVisible(this);
-		}];
+			/**
+			 * Time to wait before making the first equalize in ms
+			 * @prop
+			 * @type 	{Number}
+			 */
+			firstEqualizeDelay : 0
+		};
 	}
 
 	/**
@@ -130,7 +131,7 @@ export default class SEqualizeComponent extends SWebComponent {
 			this.refreshLines();
 			// equalize
 			this.equalize();
-		}, 100);
+		}, this.props.firstEqualizeDelay);
 
 		// listen for resizing window
 		let resizeWindowTimeout;
