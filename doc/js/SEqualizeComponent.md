@@ -54,17 +54,26 @@ Specify the timeout to wait before resize again after a window resizeTimeout
 
 Type : **{ [Number](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Number) }**
 
+Default : **200**
+
+
+### firstEqualizeDelay
+
+Time to wait before making the first equalize in ms
+
+Type : **{ [Number](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Number) }**
+
 
 
 
 ## Methods
 
 
-### equalizerElm
+### equalizerElms
 
-Return the equalizer HTMLElement if exist
+Return the equalizer(s) HTMLElement if exist
 
-Return **{ [HTMLElement](https://developer.mozilla.org/fr/docs/Web/API/HTMLElement) }** The equalizer HTMLElement
+Return **{ [HTMLElement](https://developer.mozilla.org/fr/docs/Web/API/HTMLElement) }** The equalizer(s) HTMLElement
 
 
 ### refreshLines

@@ -1,6 +1,6 @@
 {
   "name": "coffeekraken-s-equalize-component",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simply made some equal height columns",
   "main": "dist/index.js",
   "homepage": "http://coffeekraken.io",
