@@ -18,6 +18,14 @@ var _offset = require('coffeekraken-sugar/js/dom/offset');
 
 var _offset2 = _interopRequireDefault(_offset);
 
+var _whenVisible = require('coffeekraken-sugar/js/dom/whenVisible');
+
+var _whenVisible2 = _interopRequireDefault(_whenVisible);
+
+var _whenAttribute = require('coffeekraken-sugar/js/dom/whenAttribute');
+
+var _whenAttribute2 = _interopRequireDefault(_whenAttribute);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -105,11 +113,14 @@ var SEqualizeComponent = function (_SWebComponent) {
 			// init lines
 			this.lines = [];
 
-			// refresh lines first time
-			this.refreshLines();
-
-			// equalize
-			this.equalize();
+			// wait a small amount of time
+			// to avoid some weird layout issues
+			setTimeout(function () {
+				// refresh lines first time
+				_this2.refreshLines();
+				// equalize
+				_this2.equalize();
+			}, 100);
 
 			// listen for resizing window
 			var resizeWindowTimeout = void 0;
@@ -119,48 +130,24 @@ var SEqualizeComponent = function (_SWebComponent) {
 					_this2.equalize();
 				}, _this2.props.resizeTimeout);
 			});
+
+			// listen for webfonts loaded
+			var htmlElm = document.querySelector('html');
+			if (htmlElm && window.WebFont) {
+				(0, _whenAttribute2.default)(document.querySelector('html'), 'class', function () {
+					return htmlElm.classList.contains('wf-active');
+				}).then(function () {
+					setTimeout(function () {
+						_this2.refreshLines(true); // force refresh
+						_this2.equalize();
+					}, 200);
+				});
+			}
 		}
 
 		/**
-   * Component unmount
-   * @definition 		SWebComponent.componentUnmount
-   * @protected
-   */
-
-	}, {
-		key: 'componentUnmount',
-		value: function componentUnmount() {
-			_get(SEqualizeComponent.prototype.__proto__ || Object.getPrototypeOf(SEqualizeComponent.prototype), 'componentUnmount', this).call(this);
-		}
-
-		/**
-   * Component will receive prop
-   * @definition 		SWebComponent.componentWillReceiveProp
-   * @protected
-   */
-
-	}, {
-		key: 'componentWillReceiveProp',
-		value: function componentWillReceiveProp(name, newVal, oldVal) {
-			switch (name) {}
-		}
-
-		/**
-   * Render the component
-   * Here goes the code that reflect the this.props state on the actual html element
-   * @definition 		SWebComponent.render
-   * @protected
-   */
-
-	}, {
-		key: 'render',
-		value: function render() {
-			_get(SEqualizeComponent.prototype.__proto__ || Object.getPrototypeOf(SEqualizeComponent.prototype), 'render', this).call(this);
-		}
-
-		/**
-   * Return the equalizer HTMLElement if exist
-   * @return 	{HTMLElement} 		The equalizer HTMLElement
+   * Return the equalizer(s) HTMLElement if exist
+   * @return 	{HTMLElement} 		The equalizer(s) HTMLElement
    */
 
 	}, {
@@ -173,11 +160,16 @@ var SEqualizeComponent = function (_SWebComponent) {
 		value: function refreshLines() {
 			var _this3 = this;
 
-			if (SEqualizeComponent._groups[this.props.group].refreshLinesInProgress) return;
-			SEqualizeComponent._groups[this.props.group].refreshLinesInProgress = true;
-			setTimeout(function () {
-				SEqualizeComponent._groups[_this3.props.group].refreshLinesInProgress = false;
-			}, 100);
+			var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+			if (!force) {
+				if (SEqualizeComponent._groups[this.props.group].refreshLinesInProgress) return;
+				SEqualizeComponent._groups[this.props.group].refreshLinesInProgress = true;
+				setTimeout(function () {
+					SEqualizeComponent._groups[_this3.props.group].refreshLinesInProgress = false;
+				}, 100);
+			}
+
 			// loop on all the columns
 			var offsetTop = void 0;
 			this.lines = [];
@@ -190,8 +182,10 @@ var SEqualizeComponent = function (_SWebComponent) {
 
 				// reset the equalizer or element min-height
 				// to get the real height of the element
-				if (elm.equalizerElm) {
-					elm.equalizerElm.style.minHeight = 0;
+				if (elm.equalizerElms) {
+					[].forEach.call(elm.equalizerElms, function (equalizerElm) {
+						equalizerElm.style.minHeight = 0;
+					});
 				} else {
 					elm.style.minHeight = 0;
 				}
@@ -269,21 +263,26 @@ var SEqualizeComponent = function (_SWebComponent) {
 					element.classList.add('clear-transmations');
 					// reset the equalizer or element min-height
 					// to get the real height of the element
-					if (element.equalizerElm) {
-						element.equalizerElm.style.minHeight = 0;
+					if (element.equalizerElms) {
+						[].forEach.call(element.equalizerElms, function (equalizerElm) {
+							equalizerElm.style.minHeight = 0;
+						});
 					} else {
 						element.style.minHeight = 0;
 					}
 				});
 				// loop on each columns
 				[].forEach.call(line.elements, function (element) {
-					// check if an equalizer exist to use it
+					// check if some equalizer(s) exist to use it/them
 					// @TODO : find a way to not query each time in the column for the equalizer
 					// reset the equalizer or element min-height
 					// to get the real height of the element
-					if (element.equalizerElm) {
-						element.equalizerElm.style.display = 'block';
-						element.equalizerElm.style.minHeight = line.height - element.offsetHeight + 'px';
+					if (element.equalizerElms) {
+						var equalizersHeight = (line.height - element.offsetHeight) / element.equalizerElms.length;
+						[].forEach.call(element.equalizerElms, function (equalizerElm) {
+							equalizerElm.style.display = 'block';
+							equalizerElm.style.minHeight = equalizersHeight + 'px';
+						});
 					} else {
 						element.style.minHeight = line.height + 'px';
 					}
@@ -329,11 +328,11 @@ var SEqualizeComponent = function (_SWebComponent) {
 			});
 		}
 	}, {
-		key: 'equalizerElm',
+		key: 'equalizerElms',
 		get: function get() {
-			if (this._equalizerElmCache) return this._equalizerElmCache;
-			this._equalizerElmCache = this.querySelector(this._componentNameDash + '-equalizer');
-			return this._equalizerElmCache;
+			if (this._equalizerElmsCache) return this._equalizerElmsCache;
+			this._equalizerElmsCache = this.querySelectorAll(this._componentNameDash + '-equalizer');
+			return this._equalizerElmsCache;
 		}
 	}], [{
 		key: 'defaultCss',
@@ -374,15 +373,22 @@ var SEqualizeComponent = function (_SWebComponent) {
 		}
 
 		/**
+   * Store the groups
+   * @type	{Object}
+   */
+
+	}, {
+		key: 'mountDependencies',
+		get: function get() {
+			return [function () {
+				return (0, _whenVisible2.default)(this);
+			}];
+		}
+
+		/**
    * Physical props
    * @definition 		SWebComponent.physicalProps
    * @protected
-   */
-
-
-		/**
-   * Store the groups
-   * @type	{Object}
    */
 
 	}, {
