@@ -1,6 +1,8 @@
 import SWebComponent from 'coffeekraken-sugar/js/core/SWebComponent'
 import __dispatchEvent from 'coffeekraken-sugar/js/dom/dispatchEvent'
 import __offset from 'coffeekraken-sugar/js/dom/offset'
+import __whenVisible from 'coffeekraken-sugar/js/dom/whenVisible'
+import __whenAttribute from 'coffeekraken-sugar/js/dom/whenAttribute'
 
 /**
  * @name 	SEqualizeComponent
@@ -65,6 +67,12 @@ export default class SEqualizeComponent extends SWebComponent {
 		};
 	}
 
+	static get mountDependencies() {
+		return [function() {
+			return __whenVisible(this);
+		}];
+	}
+
 	/**
 	 * Physical props
 	 * @definition 		SWebComponent.physicalProps
@@ -115,11 +123,14 @@ export default class SEqualizeComponent extends SWebComponent {
 		// init lines
 		this.lines = [];
 
-		// refresh lines first time
-		this.refreshLines();
-
-		// equalize
-		this.equalize();
+		// wait a small amount of time
+		// to avoid some weird layout issues
+		setTimeout(() => {
+			// refresh lines first time
+			this.refreshLines();
+			// equalize
+			this.equalize();
+		}, 100);
 
 		// listen for resizing window
 		let resizeWindowTimeout;
@@ -129,56 +140,43 @@ export default class SEqualizeComponent extends SWebComponent {
 				this.equalize();
 			},this.props.resizeTimeout);
 		});
-	}
 
-	/**
-	 * Component unmount
-	 * @definition 		SWebComponent.componentUnmount
-	 * @protected
-	 */
-	componentUnmount() {
-		super.componentUnmount();
-	}
-
-	/**
-	 * Component will receive prop
-	 * @definition 		SWebComponent.componentWillReceiveProp
-	 * @protected
-	 */
-	componentWillReceiveProp(name, newVal, oldVal) {
-		switch(name) {
+		// listen for webfonts loaded
+		const htmlElm = document.querySelector('html');
+		if (htmlElm && window.WebFont) {
+			__whenAttribute(document.querySelector('html'), 'class', () => {
+				return htmlElm.classList.contains('wf-active');
+			}).then(() => {
+				setTimeout(() => {
+					this.refreshLines(true); // force refresh
+					this.equalize();
+				},200);
+			});
 		}
 	}
 
 	/**
-	 * Render the component
-	 * Here goes the code that reflect the this.props state on the actual html element
-	 * @definition 		SWebComponent.render
-	 * @protected
+	 * Return the equalizer(s) HTMLElement if exist
+	 * @return 	{HTMLElement} 		The equalizer(s) HTMLElement
 	 */
-	render() {
-		super.render();
-	}
-
-	/**
-	 * Return the equalizer HTMLElement if exist
-	 * @return 	{HTMLElement} 		The equalizer HTMLElement
-	 */
-	get equalizerElm() {
-		if (this._equalizerElmCache) return this._equalizerElmCache;
-		this._equalizerElmCache = this.querySelector(`${this._componentNameDash}-equalizer`);
-		return this._equalizerElmCache;
+	get equalizerElms() {
+		if (this._equalizerElmsCache) return this._equalizerElmsCache;
+		this._equalizerElmsCache = this.querySelectorAll(`${this._componentNameDash}-equalizer`);
+		return this._equalizerElmsCache;
 	}
 
 	/**
 	 * Refresh the lines values
 	 */
-	refreshLines() {
-		if (SEqualizeComponent._groups[this.props.group].refreshLinesInProgress) return;
-		SEqualizeComponent._groups[this.props.group].refreshLinesInProgress = true;
-		setTimeout(() => {
-			SEqualizeComponent._groups[this.props.group].refreshLinesInProgress = false;
-		}, 100);
+	refreshLines(force = false) {
+		if ( ! force) {
+			if (SEqualizeComponent._groups[this.props.group].refreshLinesInProgress) return;
+			SEqualizeComponent._groups[this.props.group].refreshLinesInProgress = true;
+			setTimeout(() => {
+				SEqualizeComponent._groups[this.props.group].refreshLinesInProgress = false;
+			}, 100);
+		}
+
 		// loop on all the columns
 		let offsetTop;
 		this.lines = [];
@@ -191,8 +189,10 @@ export default class SEqualizeComponent extends SWebComponent {
 
 			// reset the equalizer or element min-height
 			// to get the real height of the element
-			if (elm.equalizerElm) {
-				elm.equalizerElm.style.minHeight = 0;
+			if (elm.equalizerElms) {
+				[].forEach.call(elm.equalizerElms, (equalizerElm) => {
+					equalizerElm.style.minHeight = 0;
+				});
 			} else {
 				elm.style.minHeight = 0;
 			}
@@ -264,21 +264,26 @@ export default class SEqualizeComponent extends SWebComponent {
 				element.classList.add('clear-transmations');
 				// reset the equalizer or element min-height
 				// to get the real height of the element
-				if (element.equalizerElm) {
-					element.equalizerElm.style.minHeight = 0;
+				if (element.equalizerElms) {
+					[].forEach.call(element.equalizerElms, (equalizerElm) => {
+						equalizerElm.style.minHeight = 0;
+					});
 				} else {
 					element.style.minHeight = 0;
 				}
 			});
 			// loop on each columns
 			[].forEach.call(line.elements, (element) => {
-				// check if an equalizer exist to use it
+				// check if some equalizer(s) exist to use it/them
 				// @TODO : find a way to not query each time in the column for the equalizer
 				// reset the equalizer or element min-height
 				// to get the real height of the element
-				if (element.equalizerElm) {
-					element.equalizerElm.style.display = 'block';
-					element.equalizerElm.style.minHeight = line.height - element.offsetHeight + 'px';
+				if (element.equalizerElms) {
+					const equalizersHeight = (line.height - element.offsetHeight) / element.equalizerElms.length;
+					[].forEach.call(element.equalizerElms, (equalizerElm) => {
+						equalizerElm.style.display = 'block';
+						equalizerElm.style.minHeight = equalizersHeight + 'px';
+					});
 				} else {
 					element.style.minHeight = line.height + 'px';
 				}
