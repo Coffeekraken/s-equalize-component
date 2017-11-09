@@ -120,7 +120,7 @@ var SEqualizeComponent = function (_SWebComponent) {
 				_this2.refreshLines();
 				// equalize
 				_this2.equalize();
-			}, 100);
+			}, this.props.firstEqualizeDelay);
 
 			// listen for resizing window
 			var resizeWindowTimeout = void 0;
@@ -368,27 +368,27 @@ var SEqualizeComponent = function (_SWebComponent) {
      * @prop
      * @type 	{Number}
      */
-				resizeTimeout: 200
+				resizeTimeout: 200,
+
+				/**
+     * Time to wait before making the first equalize in ms
+     * @prop
+     * @type 	{Number}
+     */
+				firstEqualizeDelay: 0
 			};
-		}
-
-		/**
-   * Store the groups
-   * @type	{Object}
-   */
-
-	}, {
-		key: 'mountDependencies',
-		get: function get() {
-			return [function () {
-				return (0, _whenVisible2.default)(this);
-			}];
 		}
 
 		/**
    * Physical props
    * @definition 		SWebComponent.physicalProps
    * @protected
+   */
+
+
+		/**
+   * Store the groups
+   * @type	{Object}
    */
 
 	}, {
