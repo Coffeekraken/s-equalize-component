@@ -190,7 +190,7 @@ export default class SEqualizeComponent extends SWebComponent {
 
 			// reset the equalizer or element min-height
 			// to get the real height of the element
-			if (elm.equalizerElms) {
+			if (elm.equalizerElms.length) {
 				[].forEach.call(elm.equalizerElms, (equalizerElm) => {
 					equalizerElm.style.minHeight = 0;
 				});
@@ -265,7 +265,7 @@ export default class SEqualizeComponent extends SWebComponent {
 				element.classList.add('clear-transmations');
 				// reset the equalizer or element min-height
 				// to get the real height of the element
-				if (element.equalizerElms) {
+				if (element.equalizerElms.length) {
 					[].forEach.call(element.equalizerElms, (equalizerElm) => {
 						equalizerElm.style.minHeight = 0;
 					});
@@ -279,7 +279,7 @@ export default class SEqualizeComponent extends SWebComponent {
 				// @TODO : find a way to not query each time in the column for the equalizer
 				// reset the equalizer or element min-height
 				// to get the real height of the element
-				if (element.equalizerElms) {
+				if (element.equalizerElms.length) {
 					const equalizersHeight = (line.height - element.offsetHeight) / element.equalizerElms.length;
 					[].forEach.call(element.equalizerElms, (equalizerElm) => {
 						equalizerElm.style.display = 'block';
